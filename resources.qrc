@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/plugins/Temporalite" >
+        <file>icon.png</file>
+        <file>widgets/configuration/icon.png</file>
+    </qresource>
+</RCC>
