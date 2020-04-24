@@ -59,11 +59,11 @@ class Temporalite(object):
         # Declare instance attributes
         self.actions = []
         self.temp_actions = []
-        self.menu = u'&Temporalité'
+        self.menu = u'&Historisation'
 
         # Toolbar initialization
-        self.toolbar = self.iface.addToolBar(u'Temporalité')
-        self.toolbar.setObjectName(u'Temporalité')
+        self.toolbar = self.iface.addToolBar(u'Historisation')
+        self.toolbar.setObjectName(u'Historisation')
 
         # QGIS interface hooks
         self.iface.projectRead.connect(self.onProjectOpened)
