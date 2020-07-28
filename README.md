@@ -86,3 +86,25 @@ $$
     LANGUAGE PLPGSQL
     EXTERNAL SECURITY DEFINER;
 ```
+
+# Deploy
+
+Clone this repository with the submodules, fetch all tags and checkout to a <TAG_NAME> of your choice
+
+```
+git fetch --all --tags --prune
+git checkout tags/<TAG_NAME> -b <TAG_NAME>
+```
+
+Deploy to your custom repository
+
+```
+cd .\scripts
+.\deploy.ps1
+```
+
+Tell users to delete cache if they don't see the new version:
+
+`%APPDATA%\QGIS\QGIS3\profiles\default\cache`
+
+
