@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 /***************************************************************************
- Temporalite
+ Historisation
                                  A QGIS plugin
  Historisation par SITN
                              -------------------
@@ -25,11 +25,11 @@ from __future__ import absolute_import
 
 # noinspection PyPep8Naming
 def classFactory(iface):  # pylint: disable=invalid-name
-    """Load Temporalite class from file Temporalite.
+    """Load Historisation class from file Historisation.
 
     :param iface: A QGIS interface instance.
     :type iface: QgsInterface
     """
     #
-    from .main import Temporalite
-    return Temporalite(iface)
+    from Historisation.main import Historisation
+    return Historisation(iface)
