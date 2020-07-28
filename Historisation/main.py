@@ -28,7 +28,7 @@ from qgis.PyQt.QtWidgets import QAction, QPushButton, QMenu
 from qgis.PyQt.QtGui import QIcon
 # Initialize Qt resources from file resources.py
 from . import resources
-from Temporalite.project import *
+from .project import *
 
 # Import the code for the dialog
 import os.path
