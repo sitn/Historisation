@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 '''
 /***************************************************************************
- Temporalite
+ Historisation
                                  A QGIS plugin
  Historisation par SITN
                               -------------------
@@ -28,7 +28,7 @@ from qgis.PyQt.QtWidgets import QAction, QPushButton, QMenu
 from qgis.PyQt.QtGui import QIcon
 # Initialize Qt resources from file resources.py
 from . import resources
-from Temporalite.project import *
+from .project import *
 
 # Import the code for the dialog
 import os.path
@@ -37,7 +37,7 @@ import os.path
 PLUGIN_DIR = os.path.dirname(__file__)
 
 
-class Temporalite(object):
+class Historisation(object):
     '''
     QGIS Plugin Implementation.
     '''
@@ -153,7 +153,7 @@ class Temporalite(object):
 
         # New project
         self.add_action(
-            ':/plugins/Temporalite/widgets/configuration/icon.png',
+            ':/plugins/Historisation/widgets/configuration/icon.png',
             text=u'Activer l\'historisation sur la couche',
             callback=self.onConfigurationButtonClicked,
             status_tip=u'Activer l\'historisation sur la couche',
