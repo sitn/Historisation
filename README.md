@@ -103,8 +103,9 @@ cd .\scripts
 .\deploy.ps1
 ```
 
-Tell users to delete cache if they don't see the new version:
+Tell users to delete the 2 caches if they don't see the new version:
 
 `%APPDATA%\QGIS\QGIS3\profiles\default\cache`
+`%LOCALAPPDATA%\QGIS\QGIS3\cache`
 
 
