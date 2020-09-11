@@ -5,6 +5,9 @@ QGIS plugin to historize edited PostGIS data and archive it
 Using this plugin enables the historisation of all changes made on PostGIS data,
 might it be created, updated or deleted.
 
+#### Make sure you read the wiki (in french) before proceeding as the user needs the right to write in the historisation configuration tables: https://github.com/sitn/Historisation/wiki
+#### Merci de lire le wiki (en français) avant de continuer, car l'utilisateur doit avoir les droits d'écriture dans les tables de configuration de l'historisation: https://github.com/sitn/Historisation/wiki
+
 ## Initializing your database and the tables
 
 Edit the `SEARCH_PATH` which corresponds to the PostgreSQL schema
