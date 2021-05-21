@@ -10,7 +10,7 @@ if (Test-Path $dotenvPath) {
     Write-Host "Using $qgis_repo as qgis repo"
 } else {
     Write-Host "You don't have .env file"
-    $qgis_repo = Read-Host -Prompt 'Input the reporitory path:'
+    $qgis_repo = Read-Host -Prompt 'Input the repository path:'
     $stream = [System.IO.StreamWriter] $dotenvPath
     $stream.WriteLine("qgis_repo=$qgis_repo")
     $stream.close()

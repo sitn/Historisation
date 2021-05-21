@@ -49,6 +49,9 @@ class Project(QObject):
     def activateHistoryOnSelectedLayer(self):
         selectedLayer = self.getSelectedLayer()
 
+        if selectedLayer is None:
+            return
+
         if not selectedLayer.isHistorisable():
             self.iface.messageBar().pushMessage("Erreur", "La couche sélectionnée n'est pas historisable", Qgis.Critical)
             return
@@ -80,6 +83,11 @@ class Project(QObject):
         return self.getLayer(self.iface.activeLayer())
 
     def getLayer(self, layer: QgsVectorLayer) -> MapLayer:
+
+        if layer is None:
+            self.iface.messageBar().pushMessage("Information", "Il n'y a pas de couche", Qgis.Info)
+            return
+
         if layer.id() not in self.layers:
             self.layers[layer.id()] = MapLayer(layer, self.iface)
 
