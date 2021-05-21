@@ -111,4 +111,15 @@ Tell users to delete the 2 caches if they don't see the new version:
 `%APPDATA%\QGIS\QGIS3\profiles\default\cache`
 `%LOCALAPPDATA%\QGIS\QGIS3\cache`
 
+# Development mode
+
+To easily develop and link the plugin, one should consider creating a linked folder between the QGIS Python plugin folder and the work/development folder. To do so, you can use a symlink:
+
+    1. Create your working folder and link it to your Github repositories (something like c:/projects/historisation)
+    2. Check the path to the Python plugin folder of QGIS (if on Windows 64bits, it would be somewhere like C:\Program Files\QGIS 3.16\apps\qgis\python\plugins)
+    3. Open a command prompt as Administrator and run:
+
+    mklink /D "c:\Program Files\QGIS 3.16\apps\qgis\python\plugins\Historisation" "c:\projects\historisation\Historisation"
+
+Now you can develop in your working and tested it live in QGIS (using the plugin reloader).
 
