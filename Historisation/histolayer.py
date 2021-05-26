@@ -54,9 +54,12 @@ class HistoLayer(Layer):
         histoFeature = QgsFeature(self.getVectorLayer().fields())
 
         histoFeature.setGeometry(QgsGeometry(currentFeature.geometry()))
-
-        for field in currentFeature.fields():
-            histoFeature.setAttribute(field.name(), currentFeature.attribute(field.name()))
+        
+        for field in currentFeature.fields():          
+            if isinstance(currentFeature.attribute(field.name()), str) is True and currentFeature.attribute(field.name()).endswith('()') is True:
+                histoFeature.setAttribute(field.name(), None)
+            else:
+                histoFeature.setAttribute(field.name(), currentFeature.attribute(field.name()))
 
         self._setStartDate(histoFeature, eventDate)
         self._setStartEventId(histoFeature, eventId)
