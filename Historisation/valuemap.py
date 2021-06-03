@@ -20,9 +20,13 @@ class ValueMap(object):
         destinationFieldName = fieldName+"_desc"
         valueMap = dict()
 
-        for item in config["map"]:
-            for k, v in item.items():
-                valueMap[v] = k
+        if isinstance(config["map"], dict):
+            for k, v in config["map"].items():
+                    valueMap[v] = k
+        else:
+            for item in config["map"]:
+                for k, v in item.items():
+                    valueMap[v] = k
 
         return ValueMap(sourceFieldName, destinationFieldName, valueMap)
 
