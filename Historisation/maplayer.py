@@ -71,8 +71,18 @@ class MapLayer(Layer):
 
         if listen:
             self.getVectorLayer().beforeCommitChanges.connect(self.onBeforeCommitChanges)
+            self.getVectorLayer().committedFeaturesAdded.connect(self.onCommittedFeaturesAdded)
+            self.getVectorLayer().committedAttributeValuesChanges.connect(self.onCommittedAttributeValuesChanges)
+            self.getVectorLayer().committedGeometriesChanges.connect(self.onCommittedGeometriesChanges)
+            self.getVectorLayer().committedFeaturesRemoved.connect(self.onCommittedFeaturesRemoved)
+            self.getVectorLayer().afterCommitChanges.connect(self.onAfterCommitChanges)
         else:
             self.getVectorLayer().beforeCommitChanges.disconnect(self.onBeforeCommitChanges)
+            self.getVectorLayer().committedFeaturesAdded.disconnect(self.onCommittedFeaturesAdded)
+            self.getVectorLayer().committedAttributeValuesChanges.disconnect(self.onCommittedAttributeValuesChanges)
+            self.getVectorLayer().committedGeometriesChanges.disconnect(self.onCommittedGeometriesChanges)
+            self.getVectorLayer().committedFeaturesRemoved.disconnect(self.onCommittedFeaturesRemoved)
+            self.getVectorLayer().afterCommitChanges.disconnect(self.onAfterCommitChanges)
 
     def historizeTable(self, displayField: str, idField: str):
         now = QDateTime.currentDateTime()
@@ -99,17 +109,31 @@ class MapLayer(Layer):
         self.histoLayer.initializeTable(now, eventId, self.valueMaps)
 
     def onBeforeCommitChanges(self):
+        self.added = []
+        self.modifiedGeometries = []
+        self.modifiedAttributes = []
+        self.deletedIds = []
+
+    def onCommittedFeaturesAdded(self, layerId, addedFeatures):
+        self.added = addedFeatures
+
+    def onCommittedAttributeValuesChanges(self, layerId, changedAttributesValues):
+        self.modifiedAttributes = changedAttributesValues
+
+    def onCommittedGeometriesChanges(self, layerId, changedGeometries):
+        self.modifiedGeometries = changedGeometries
+
+    def onCommittedFeaturesRemoved(self, layerId, deletedFeatureIds):
+        self.deletedIds = deletedFeatureIds
+
+    def onAfterCommitChanges(self):
         # Get modifications
-        editBuffer = self.getVectorLayer().editBuffer()
+        added = list(self.added)
 
-        added = list(editBuffer.addedFeatures().values())
-
-        modifiedGeometries = editBuffer.changedGeometries()
-        modifiedAttributes = editBuffer.changedAttributeValues()
-        modifiedIds = list(set(list(modifiedGeometries)+list(modifiedAttributes)))
+        modifiedIds = list(set(list(self.modifiedGeometries)+list(self.modifiedAttributes)))
         modified = [] if len(modifiedIds) == 0 else list(self.getFeatures(QgsFeatureRequest(modifiedIds)))
 
-        deletedIds = editBuffer.deletedFeatureIds()
+        deletedIds = list(self.deletedIds)
         deleted = [] if len(deletedIds) == 0 else list(self.getDatabaseFeatures(QgsFeatureRequest(deletedIds)))
 
         # Get user events
