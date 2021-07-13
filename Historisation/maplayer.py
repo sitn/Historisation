@@ -128,7 +128,8 @@ class MapLayer(Layer):
 
     def onAfterCommitChanges(self):
         # Get modifications
-        added = list(self.added)
+        addedIds = list(map(lambda x: x.id(), self.added))
+        added = [] if len(addedIds) == 0 else list(self.getFeatures(QgsFeatureRequest(addedIds)))
 
         modifiedIds = list(set(list(self.modifiedGeometries)+list(self.modifiedAttributes)))
         modified = [] if len(modifiedIds) == 0 else list(self.getFeatures(QgsFeatureRequest(modifiedIds)))
