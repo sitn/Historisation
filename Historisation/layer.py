@@ -17,7 +17,10 @@ class Layer(object):
         return self.createVectorLayer()
 
     def createVectorLayer(self):
-        return QgsVectorLayer(self.uri.uri(), self.uri.table(), "postgres")
+        if(self.tableExists()):
+            return QgsVectorLayer(self.uri.uri(), self.uri.table(), "postgres")
+        else:
+            return QgsVectorLayer()
 
     def getSqlConnection(self):
         return psycopg2.connect(
@@ -45,6 +48,18 @@ class Layer(object):
 
     def commitChanges(self):
         self.getVectorLayer().commitChanges()
+
+    def tableExists(self) -> bool:
+        query = "SELECT EXISTS (SELECT * FROM information_schema.tables WHERE table_schema='{0}' AND table_name='{1}')".format(self.uri.schema(), self.uri.table())
+
+        conn = self.getSqlConnection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchone()
+        cursor.close()
+        conn.close()
+
+        return data[0]
 
     def _getUsername(self) -> str:
         if self.uri.username() != '':

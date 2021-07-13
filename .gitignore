@@ -2,3 +2,4 @@ scripts/.env
 Historisation/__pycache__/*
 Historisation/widgets/configuration/__pycache__/*
 Historisation/widgets/saveManagementTool/__pycache__/*
+Historisation/.vscode/
