@@ -4,7 +4,7 @@ Created on February, 04th 2020
 @author: arxit
 '''
 from qgis.core import QgsDataSourceUri, QgsVectorLayer, QgsFeatureRequest, QgsFeatureIterator, QgsExpression, QgsFeature
-
+from qgis.PyQt.QtCore import QSettings
 import psycopg2
 import re
 
@@ -12,6 +12,13 @@ import re
 class Layer(object):
     def __init__(self, uri: QgsDataSourceUri):
         self.uri = uri
+        settings = QSettings()
+        self.pg_db_database = settings.value("HistorisationSITN/DB", '')
+        self.pg_db_host = settings.value("HistorisationSITN/DBHost", '')
+        self.pg_db_port = settings.value("HistorisationSITN/DBPort", 5432)
+        self.pg_db_user = settings.value("HistorisationSITN/DBUser", '')
+        self.pg_db_password = settings.value("HistorisationSITN/DBPassword", '')
+
 
     def getVectorLayer(self) -> QgsVectorLayer:
         return self.createVectorLayer()
@@ -24,11 +31,11 @@ class Layer(object):
 
     def getSqlConnection(self):
         return psycopg2.connect(
-            user=self._getUsername(),
-            password=self._getPassword(),
-            host=self.uri.host(),
-            port=self.uri.port(),
-            database=self.uri.database()
+            user=self.pg_db_user,
+            password=self.pg_db_password,
+            host=self.pg_db_host,
+            port=self.pg_db_port,
+            database=self.pg_db_database
         )
 
     def getFeatures(self, request: QgsFeatureRequest = QgsFeatureRequest()) -> QgsFeatureIterator:
@@ -60,15 +67,3 @@ class Layer(object):
         conn.close()
 
         return data[0]
-
-    def _getUsername(self) -> str:
-        if self.uri.username() != '':
-            return self.uri.username()
-        else:
-            return re.search("user='([^']+)", self.uri.uri()).group(1)
-
-    def _getPassword(self) -> str:
-        if self.uri.password() != '':
-            return self.uri.password()
-        else:
-            return re.search("password='([^']+)", self.uri.uri()).group(1)

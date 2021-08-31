@@ -29,6 +29,7 @@ from qgis.PyQt.QtGui import QIcon
 # Initialize Qt resources from file resources.py
 from . import resources
 from .project import *
+from .settings import defineDBSettings
 
 # Import the code for the dialog
 import os.path
@@ -151,13 +152,27 @@ class Historisation(object):
         Create the menu entries and toolbar icons inside the QGIS GUI.
         '''
 
+        definedDB = QSettings().value("HistorisationSITN/DB", None)
+        enable_button = False
+        if definedDB is not None and definedDB != '':
+            enable_button = True
+
         # New project
         self.add_action(
             ':/plugins/Historisation/widgets/configuration/icon.png',
             text=u'Activer l\'historisation sur la couche',
             callback=self.onConfigurationButtonClicked,
             status_tip=u'Activer l\'historisation sur la couche',
+            enabled_flag=enable_button,
             parent=self.iface.mainWindow())
+
+        self.add_action(
+            ':/plugins/Historisation/widgets/configuration/icon_settings.png',
+            text=u'Définir les paramètres de connexion à la BD',
+            callback=self.onSettingsButtonClicked,
+            status_tip=u'Définir les paramètres de connexion à la BD',
+            parent=self.iface.mainWindow())
+
 
         # Update buttons availability
         self.updateGui()
@@ -180,6 +195,10 @@ class Historisation(object):
             return
 
         self.current_project.activateHistoryOnSelectedLayer()
+
+    def onSettingsButtonClicked(self):
+
+        defineDBSettings(self)
 
     def unload(self):
         '''
