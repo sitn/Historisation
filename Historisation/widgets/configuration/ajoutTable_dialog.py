@@ -33,7 +33,6 @@ from qgis.core import QgsDataSourceUri, QgsFeature, QgsVectorLayer, QgsVectorLay
 import db_manager.db_plugins.postgis.connector as con
 from qgis.PyQt.QtCore import QCoreApplication, QSettings, QVariant
 
-import Historisation.main
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ajoutTable_dialog.ui'))

@@ -10,7 +10,7 @@
 name=Temporalite
 qgisMinimumVersion=3.0
 description=Plugin d'historisation de SITN
-version=0.1
+version=2.1.0rc1
 author=arx iT, SITN
 email=sitn@ne.ch
 
@@ -32,7 +32,7 @@ homepage=https://github.com/sitn/Historisation
 category=Plugins
 icon=icon.png
 # experimental flag
-experimental=False
+experimental=True
 
 # deprecated flag (applies to the whole plugin, not just a single version)
 deprecated=False

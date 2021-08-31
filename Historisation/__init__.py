@@ -31,5 +31,5 @@ def classFactory(iface):  # pylint: disable=invalid-name
     :type iface: QgsInterface
     """
     #
-    from Historisation.main import Historisation
+    from .main import Historisation
     return Historisation(iface)
