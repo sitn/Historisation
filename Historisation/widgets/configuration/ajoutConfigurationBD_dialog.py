@@ -39,8 +39,6 @@ class ajoutConfigurationBD(QDialog, FORM_CLASS):
            self.pg_db_port.setText(settings.value("HistorisationSITN/DBPort", 5432))
            self.pg_db_user.setText(settings.value("HistorisationSITN/DBUser", ''))
            self.pg_db_password.setText(settings.value("HistorisationSITN/DBPassword", ''))
-    
-        self.pg_db_database.setText('toto2')
 
 
     def onButtonClicked(self):
