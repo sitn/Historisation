@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>SITN 4D -Historisation d'une table</string>
+   <string>SITN 4D - Historisation d'une table</string>
   </property>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">

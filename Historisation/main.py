@@ -154,7 +154,7 @@ class Historisation(object):
 
         definedDB = QSettings().value("HistorisationSITN/DB", None)
         enable_button = False
-        if definedDB is not None and definedDB != '':
+        if definedDB:
             enable_button = True
 
         # New project
