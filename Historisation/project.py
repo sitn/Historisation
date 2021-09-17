@@ -53,11 +53,11 @@ class Project(QObject):
             return
 
         if not selectedLayer.isHistorisable():
-            self.iface.messageBar().pushMessage("Erreur", "La couche sélectionnée n'est pas historisable", Qgis.Critical)
+            self.iface.messageBar().pushMessage("Erreur", "La couche sélectionnée n'est pas historisable", Qgis.Warning)
             return
 
         if selectedLayer.isAlreadyHistorized():
-            self.iface.messageBar().pushMessage("Attention", "La couche sélectionnée est déjà historisée", Qgis.Warning)
+            self.iface.messageBar().pushMessage("Attention", "La couche sélectionnée est déjà historisée", Qgis.Info)
             return
 
         dlg = AjoutTableDialog()
