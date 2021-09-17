@@ -49,7 +49,7 @@ class ajoutConfigurationBD(QDialog, FORM_CLASS):
         pg_db_port = self.pg_db_port.text()
         pg_db_host = self.pg_db_host.text()
         errors = False
-        if pg_db_host is None or pg_db_host == '':
+        if not pg_db_host:
             self.bar.pushMessage("Paramètres", "un hôte pour la BD doit être défini", level=Qgis.Critical)
             errors = True
         if pg_db_database is None or pg_db_database == '':
