@@ -10,7 +10,7 @@
 name=Temporalite
 qgisMinimumVersion=3.0
 description=Plugin d'historisation de SITN
-version=2.1.0
+version=2.1.1
 author=arx iT, SITN
 email=sitn@ne.ch
 
