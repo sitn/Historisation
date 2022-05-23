@@ -7,7 +7,7 @@
 # This file should be included when you package your plugin.# Mandatory items:
 
 [general]
-name=Temporalite
+name=Historisation
 qgisMinimumVersion=3.0
 description=Plugin d'historisation de SITN
 version=2.1.1
